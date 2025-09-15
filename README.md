@@ -1,1 +1,158 @@
-# Uriel
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Un mensaje para ti, mi amor! ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Fondo con gradiente animado para un efecto romántico */
+            background: linear-gradient(-45deg, #fce7f3, #e8d0f1, #c5b4e3, #b4d3e8);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+        }
+
+        /* Animación para el gradiente de fondo */
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Animación para el ícono de corazón */
+        .heart-icon {
+            animation: beat-and-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes beat-and-pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.5));
+            }
+
+            50% {
+                transform: scale(1.2);
+                filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.8));
+            }
+        }
+
+        /* Animación de los corazones flotantes */
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            opacity: 0;
+            pointer-events: none;
+            font-size: 20px;
+            color: #FF69B4;
+            animation: float-up 6s ease-out forwards;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-50vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4 text-gray-800 overflow-hidden">
+    <div class="bg-white bg-opacity-80 p-6 sm:p-10 rounded-xl shadow-2xl w-full max-w-lg space-y-6 text-center transform transition-transform duration-500 hover:scale-105">
+        <!-- Ícono de corazón animado más bonito -->
+        <div class="heart-icon mx-auto mb-4 w-16 h-16 sm:w-20 sm:h-20 text-pink-600">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+        </div>
+
+        <!-- Título principal -->
+        <h1 class="text-3xl sm:text-4xl font-bold text-pink-600">¡Un mensaje para ti, mi amor!</h1>
+
+        <!-- Contenedor del mensaje principal con un estilo de tarjeta -->
+        <div class="bg-purple-100 bg-opacity-60 p-6 rounded-lg shadow-inner min-h-[10rem]">
+            <p id="message-container" class="text-lg text-gray-700 leading-relaxed italic"></p>
+        </div>
+
+        <!-- Mensaje final -->
+        <p class="text-sm text-gray-500 mt-4">Te amo mi vidaa ❤️</p>
+    </div>
+
+    <script>
+        // The message to be typed out
+        const messageText = "Hola, mi amor. Solo para recordarte que eres increíble y que no hay nadie como tú. Me encanta pasar cada segundo a tu lado, haces mi vida mucho más feliz. Te quiero mucho y me hace muy feliz poder pasar un mes más juntos ❤️.";
+
+        const messageContainer = document.getElementById('message-container');
+
+        // Function to simulate typing
+        function typeMessage() {
+            let i = 0;
+            const typingInterval = setInterval(() => {
+                if (i < messageText.length) {
+                    messageContainer.textContent += messageText.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                    // Trigger the heart rain effect
+                    triggerHeartRain();
+                }
+            }, 50); // Typing speed in milliseconds
+        }
+
+        // Function to trigger the heart rain effect
+        function triggerHeartRain() {
+            const container = document.body;
+
+            function createHeart() {
+                const heart = document.createElement('span');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${3 + Math.random() * 3}s`; // 3-6 seconds
+                heart.style.animationDelay = `${Math.random() * 2}s`; // 0-2 seconds delay
+                container.appendChild(heart);
+
+                // Remove heart after animation ends
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }
+
+            // Create hearts for a few seconds
+            const heartInterval = setInterval(createHeart, 200);
+
+            // Stop creating hearts after 3 seconds
+            setTimeout(() => {
+                clearInterval(heartInterval);
+            }, 3000);
+        }
+
+        // Start typing the message when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            typeMessage();
+        });
+    </script>
+</body>
+
+</html>
